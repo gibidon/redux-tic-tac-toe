@@ -2,10 +2,10 @@ import { GameLayout } from "./game-layout"
 import { store } from "./store"
 
 function Game() {
-	const field = store.getState()
-	console.log("field store: ", field)
+	const storeData = store.getState()
+	console.log("game store: ", storeData)
 	window.store = store
-	return <GameLayout field={field} />
+	return <GameLayout field={storeData.game} />
 }
 
 export { Game }

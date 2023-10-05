@@ -1,15 +1,16 @@
-import { createStore } from "redux"
+// import { createStore } from "redux"
+// import { configureStore } from "@reduxjs/toolkit"
 
 const initialState = Array(9).fill("NOBODY")
 
-const reducer = (state = initialState, action) => {
+const gameReducer = (state = initialState, action) => {
 	console.log(action)
+	console.log(state)
 
 	switch (action.type) {
 		case "fill_cell":
 			console.log("filling cell")
 			console.log("payload: ", action.payload)
-			// return state
 			const newState = [...state]
 			newState[action.payload] = "changed"
 			return newState
@@ -20,4 +21,8 @@ const reducer = (state = initialState, action) => {
 	}
 }
 
+// export { gameReducer }
+const reducer = {
+	game: gameReducer,
+}
 export { reducer }
