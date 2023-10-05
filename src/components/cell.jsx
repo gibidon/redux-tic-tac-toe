@@ -1,21 +1,29 @@
-// import { bound_fill_cell } from "../actions"
 import styles from "./cell.module.scss"
-import { fill_cell, change_player } from "../features/gameSlice"
 import { store } from "../store"
+import { checkEmptyCell } from "../utils/check-empty-cell"
+import { checkWin } from "../utils/check-winner"
+
+const handleCLick = (index) => {
+	store.dispatch({ type: "fill_cell", payload: index })
+}
 
 export const Cell = ({ content, index }) => {
+	const { status, winner } = store.getState().game
+	console.log("winner in cell: ", winner)
 	return (
 		<button
 			className={styles.cell}
 			onClick={() => {
-				// fill_cell(index)
-				// change_player()
-				store.dispatch({ type: "fill_cell", payload: index })
-				// store.dispatch(change_player())
-				console.log(index)
+				if (status === "OFF" || winner !== "" || content !== "") {
+					return
+				} else {
+					if (checkEmptyCell) {
+						handleCLick(index)
+						checkWin()
+					}
+				}
 			}}
 		>
-			{/* onClick = dispatch */}
 			{content}
 		</button>
 	)
