@@ -1,13 +1,16 @@
+import { PLAYER } from "./constants/player"
 import { createEmptyField } from "./utils/create-empty-field"
 
 const initialState = {
 	field: createEmptyField(),
-	player: "X",
-	winner: "",
+	// player: "X",
+	player: PLAYER.CROSS,
+	winner: null,
 	status: "ON",
 }
 const getNewPlayer = (player) => {
-	return player === "X" ? "O" : "X"
+	// return player === "X" ? "O" : "X"
+	return player === PLAYER.CROSS ? PLAYER.NOUGHT : PLAYER.CROSS
 }
 
 const gameReducer = (state = initialState, action) => {

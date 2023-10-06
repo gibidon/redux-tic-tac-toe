@@ -1,3 +1,9 @@
+import { PLAYER } from "../constants/player"
+
+// export const createEmptyField = () => {
+// 	return Array(9).fill("")
+// }
+
 export const createEmptyField = () => {
-	return Array(9).fill("")
+	return Array(9).fill(PLAYER.NOBODY)
 }
