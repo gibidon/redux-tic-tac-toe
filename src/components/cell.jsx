@@ -10,24 +10,31 @@ const handleCLick = (index) => {
 }
 
 export const Cell = ({ content, index }) => {
-	console.log("content", content)
-	const { field, status, winner } = store.getState().game
+	const { field, status, winner, player } = store.getState().game
 
 	return (
 		<button
 			className={styles.cell}
 			onClick={() => {
-				if (status === "OFF" || winner || content !== PLAYER.NOBODY) {
+				if (
+					status === "OFF" ||
+					status === "DRAW" ||
+					winner ||
+					content !== PLAYER.NOBODY
+				) {
 					return
 				} else {
 					if (checkEmptyCell(field)) {
 						handleCLick(index)
-						// checkWin()
+						const newField = [...field]
+						newField[index] = player
+						checkWin(newField, player)
+					} else {
+						store.dispatch({ type: "set_status", payload: "DRAW" })
 					}
 				}
 			}}
 		>
-			{/* {content} */}
 			{PLAYER_SIGN[content]}
 		</button>
 	)
