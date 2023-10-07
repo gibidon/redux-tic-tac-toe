@@ -1,7 +1,7 @@
 import styles from "./cell.module.scss"
-import { store } from "../store"
-import { checkEmptyCell, checkWin } from "../utils"
-import { PLAYER, PLAYER_SIGN } from "../constants"
+import { store } from "../../../../store"
+import { checkEmptyCell, checkWin } from "../../../../utils"
+import { PLAYER, PLAYER_SIGN } from "../../../../constants"
 
 const handleCLick = (index) => {
 	store.dispatch({ type: "FILL_CELL", payload: index })
@@ -25,7 +25,7 @@ export const Cell = ({ content, index }) => {
 					return
 				}
 				if (!checkEmptyCell(newField)) {
-					store.dispatch({ type: "SET_STATUS_DRAW" })
+					store.dispatch({ type: "SET_STATUS", payload: "DRAW" })
 				}
 			}}
 		>

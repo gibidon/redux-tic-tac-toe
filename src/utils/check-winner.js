@@ -8,7 +8,7 @@ export const checkWin = (field, player) => {
 		)
 	) {
 		store.dispatch({ type: "SET_WINNER", payload: player })
-		store.dispatch({ type: "SET_STATUS_WIN" })
+		store.dispatch({ type: "SET_STATUS", payload: "WIN" })
 		return true
 	}
 }

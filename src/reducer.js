@@ -17,14 +17,12 @@ const gameReducer = (state = initialState, action) => {
 			let newField = [...state.field]
 			newField[action.payload] = state.player
 			return { ...state, field: newField, player: getNewPlayer(state.player) }
-		case "SET_STATUS_DRAW":
-			return { ...state, status: "DRAW" }
 		case "SET_WINNER":
 			return { ...state, winner: action.payload }
 		case "RESET":
 			return { ...state, ...initialState }
-		case "SET_STATUS_WIN":
-			return { ...state, status: "WIN" }
+		case "SET_STATUS":
+			return { ...state, status: action.payload }
 		default:
 			return state
 	}
