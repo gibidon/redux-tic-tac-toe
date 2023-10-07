@@ -10,7 +10,7 @@ export const Game = () => {
 
 	const { field, player, winner, status } = gameData
 
-	//Refresh state in this component when store is changed
+	//Refresh state in this component when store is changed,then props go down
 	store.subscribe(() => {
 		setGameData(store.getState().game)
 	})

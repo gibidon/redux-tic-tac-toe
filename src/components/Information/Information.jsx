@@ -1,10 +1,12 @@
 import styles from "./information.module.scss"
+import { PLAYER_NAME } from "../../constants"
 
 export const Information = ({ status, winner, player }) => {
 	return (
 		<div className={styles.information}>
 			<p>Status: {status}</p>
-			{winner !== null && <div>Winner: {winner === 0 ? "CROSS" : "NOUGHTS"}</div>}
+			{status !== "DRAW" && <p>Now making move: {PLAYER_NAME[player]}</p>}
+			{winner !== null && <div>Winner: {PLAYER_NAME[winner]}</div>}
 		</div>
 	)
 }
