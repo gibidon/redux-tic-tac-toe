@@ -7,7 +7,8 @@ export const checkWin = (field, player) => {
 			winPattern.every((cellIndex) => field[cellIndex] === player)
 		)
 	) {
-		store.dispatch({ type: "set_winner", payload: player })
-		store.dispatch({ type: "set_status_off" })
+		store.dispatch({ type: "SET_WINNER", payload: player })
+		store.dispatch({ type: "SET_STATUS_WIN" })
+		return true
 	}
 }

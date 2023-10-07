@@ -1,37 +1,31 @@
 import styles from "./cell.module.scss"
 import { store } from "../store"
-import { checkEmptyCell } from "../utils/check-empty-cell"
-import { checkWin } from "../utils/check-winner"
-import { PLAYER } from "../constants/player"
-import { PLAYER_SIGN } from "../constants/player_signs"
+import { checkEmptyCell, checkWin } from "../utils"
+import { PLAYER, PLAYER_SIGN } from "../constants"
 
 const handleCLick = (index) => {
-	store.dispatch({ type: "fill_cell", payload: index })
+	store.dispatch({ type: "FILL_CELL", payload: index })
 }
 
 export const Cell = ({ content, index }) => {
-	const { field, status, winner, player } = store.getState().game
+	const { field, status, player } = store.getState().game
 
 	return (
 		<button
 			className={styles.cell}
 			onClick={() => {
-				if (
-					status === "OFF" ||
-					status === "DRAW" ||
-					winner ||
-					content !== PLAYER.NOBODY
-				) {
+				if (status === "WIN" || status === "DRAW" || content !== PLAYER.NOBODY) {
 					return
-				} else {
-					if (checkEmptyCell(field)) {
-						handleCLick(index)
-						const newField = [...field]
-						newField[index] = player
-						checkWin(newField, player)
-					} else {
-						store.dispatch({ type: "set_status", payload: "DRAW" })
-					}
+				}
+				handleCLick(index)
+				const newField = [...field]
+				newField[index] = player
+
+				if (checkWin(newField, player)) {
+					return
+				}
+				if (!checkEmptyCell(newField)) {
+					store.dispatch({ type: "SET_STATUS_DRAW" })
 				}
 			}}
 		>
